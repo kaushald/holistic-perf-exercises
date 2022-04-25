@@ -1,0 +1,10 @@
+config:
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 10
+      arrivalRate: 1
+scenarios:
+  - flow:
+    - post:
+        url: "/friends"
+        body: '{"firstName":"Kaushal","lastName":"Dalvi"}'

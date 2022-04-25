@@ -1,0 +1,34 @@
+config:
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 60
+      arrivalRate: 3
+  ensure:
+    p95: 10
+    maxErrorRate: 1
+  payload:
+      path: "names.csv"
+      fields:
+        - "firstName"
+        - "lastName"
+scenarios:
+  - flow:
+
+    - post:
+        url: "/friends"
+        json:
+          firstName: "{{ firstName }}"
+          lastName: "{{ lastName }}"
+        capture:
+          - json: "$._links.self.href"
+            as: new_link
+          - json: "$.firstName"
+            as: captured_name
+        expect:
+          - statusCode: 201
+          - contentType: json
+          - equals:
+            - "{{ firstName }}"
+            - "{{ captured_name }}"
+
+    - log: "link : {{ new_link }} for {{ captured_name }}"
