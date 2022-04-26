@@ -78,7 +78,7 @@ artillery run test-02-corr-param.yaml -o report.yml
 ##### GENERATE REPORT
 
 ```shell
-artillery run test-00-basic-get.yaml -o report.yml
+artillery report report.yml
 ```
 
 #### SAMPLE TEST APPLICATION
