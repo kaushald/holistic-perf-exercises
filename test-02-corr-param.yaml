@@ -4,7 +4,7 @@ config:
     - duration: 60
       arrivalRate: 3
   ensure:
-    p95: 10
+    p95: 1
     maxErrorRate: 1
   payload:
       path: "names.csv"
@@ -15,7 +15,7 @@ scenarios:
   - flow:
 
     - post:
-        url: "/friends"
+        url: "/friend"
         json:
           firstName: "{{ firstName }}"
           lastName: "{{ lastName }}"

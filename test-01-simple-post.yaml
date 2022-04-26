@@ -6,5 +6,5 @@ config:
 scenarios:
   - flow:
     - post:
-        url: "/friends"
+        url: "/friend"
         body: '{"firstName":"Kaushal","lastName":"Dalvi"}'
