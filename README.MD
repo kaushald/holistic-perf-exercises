@@ -15,25 +15,25 @@ npm i -g lighthouse
 ##### RUN SIMPLE TEST
 
 ```shell
-lighthouse --view https://stareast.techwell.com/
+lighthouse --view https://kaushaldalvi.com/
 ```
 
 ##### RUN BUDGET TEST - EASY
 
 ```shell
-lighthouse --budgetPath ./budget.easy.json --view https://stareast.techwell.com/
+lighthouse --budgetPath ./budget.easy.json --view https://kaushaldalvi.com/
 ```
 
 ##### RUN BUDGET TEST - NORMAL
 
 ```shell
-lighthouse --budgetPath ./budget.json --view https://stareast.techwell.com/
+lighthouse --budgetPath ./budget.json --view https://kaushaldalvi.com/
 ```
 
 ##### RUN BUDGET TEST - STRICT
 
 ```shell
-lighthouse --budgetPath ./budget.strict.json --view https://stareast.techwell.com/
+lighthouse --budgetPath ./budget.strict.json --view https://kaushaldalvi.com/
 ```
 
 #### BUDGET CALCULATOR
