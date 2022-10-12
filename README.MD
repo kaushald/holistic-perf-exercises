@@ -4,6 +4,12 @@
 
 ### TOOLS
 
+#### NODEJS
+
+##### INSTALLATION
+
+Download and install from [the official site](https://nodejs.org/).
+
 #### LIGHTHOUSE
 
 ##### INSTALLATION
