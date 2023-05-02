@@ -87,16 +87,44 @@ artillery run test-02-corr-param.yaml -o report.yml
 artillery report report.yml
 ```
 
+#### K6
+
+##### INSTALLATION
+
+###### MAC
+
+```
+brew install k6
+```
+
+###### Windows
+
+```
+choco install k6
+```
+
+or
+
+```
+winget install k6
+```
+
+##### RUN TEST WITH CORRELATION/PARAMETERIZATION
+
+```shell
+k6 run k6-test.js
+```
+
 #### SAMPLE TEST APPLICATION
 
 ##### 8086
 
 ```shell
-docker run -d -p 8080:8080 kaushald/leakyserver
+docker run -d -p 8080:8080 --name test_app kaushald/leakyserver
 ```
 
 ##### ARM
 
 ```shell
-docker run -d -p 8080:8080 kaushald/leakyserver-arm
+docker run -d -p 8080:8080 --name test_app kaushald/leakyserver-arm
 ```
