@@ -50,6 +50,16 @@ lighthouse --budgetPath ./budget.strict.json --view https://kaushaldalvi.com/
 https://www.performancebudget.io/
 ```
 
+#### LIGHTHOUSE-PARADE
+
+URL: https://github.com/cloudfour/lighthouse-parade
+
+##### Running a parade
+
+```
+npx lighthouse-parade https://kaushaldalvi.com/ --max-crawl-depth 2
+```
+
 ## BACK-END PERFORMANCE
 
 ### TOOLS
