@@ -16,6 +16,7 @@ Download and install from [the official site](https://nodejs.org/).
 
 ```shell
 npm i -g lighthouse
+npm i -g lighthouse-ci
 ```
 
 ##### RUN SIMPLE TEST
@@ -27,19 +28,19 @@ lighthouse --view https://kaushaldalvi.com/
 ##### RUN BUDGET TEST - EASY
 
 ```shell
-lighthouse --budgetPath ./budget.easy.json --view https://kaushaldalvi.com/
+lighthouse-ci --budgetPath ./budget.easy.json --view https://kaushaldalvi.com/
 ```
 
 ##### RUN BUDGET TEST - NORMAL
 
 ```shell
-lighthouse --budgetPath ./budget.json --view https://kaushaldalvi.com/
+lighthouse-ci --budgetPath ./budget.json --view https://kaushaldalvi.com/
 ```
 
 ##### RUN BUDGET TEST - STRICT
 
 ```shell
-lighthouse --budgetPath ./budget.strict.json --view https://kaushaldalvi.com/
+lighthouse-ci --budgetPath ./budget.strict.json --view https://kaushaldalvi.com/
 ```
 
 #### BUDGET CALCULATOR
@@ -88,7 +89,7 @@ artillery run test-01-simple-post.yaml -o report.yml
 ##### RUN TEST WITH CORRELATION/PARAMETERIZATION
 
 ```shell
-artillery run test-02-corr-param.yaml -o report.yml
+artillery run test-02-corr-param.yaml --record --key {key}
 ```
 
 ##### GENERATE REPORT
