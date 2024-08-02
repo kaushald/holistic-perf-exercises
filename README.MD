@@ -139,3 +139,9 @@ docker run -d -p 8080:8080 --name test_app kaushald/leakyserver
 ```shell
 docker run -d -p 8080:8080 --name test_app kaushald/leakyserver-arm
 ```
+
+##### NestJs App (Universal)
+
+```shell
+docker run -d -p 3000:3000 --name test_app kaushald/sample-app
+```

@@ -3,8 +3,9 @@ import { sleep } from "k6";
 import { SharedArray } from "k6/data";
 import { check } from "k6";
 
-// Load test data from JSON file
+// Load test data from JSON file into a SharedArray to be used by all VUs (virtual users)
 const testData = new SharedArray("testData", function () {
+  // Parsing the JSON file and mapping each row to an array of firstName and lastName
   return JSON.parse(open("test_data.json")).map((row) => [
     row.firstName,
     row.lastName,
@@ -12,53 +13,65 @@ const testData = new SharedArray("testData", function () {
 });
 
 export const options = {
-  iterations: 50,
-  vus: 5, // Adjust this value based on your desired number of virtual users
+  stages: [
+    // Ramp-up: start with 1 virtual user and increase to 5 over 1 minute
+    { duration: "1m", target: 5 },
+    // Hold: maintain 5 virtual users for 2 minutes
+    { duration: "2m", target: 5 },
+    // Ramp-down: decrease from 5 virtual users to 0 over 1 minute
+    { duration: "1m", target: 0 },
+  ],
+  thresholds: {
+    // Set a threshold that 95% of the requests should complete within 500ms
+    http_req_duration: ["p(95)<500"],
+  },
 };
 
-// export const options = {
-//   stages: [
-//     // Ramp-up from 1 to 10 virtual users over 1 minute
-//     { duration: "1m", target: 2 },
-//     // Stay at 10 virtual users for 4 minutes
-//     { duration: "3m", target: 2 },
-//     // Ramp-down from 10 to 0 virtual users over 1 minute
-//     { duration: "1m", target: 0 },
-//   ],
-//   thresholds: {
-//     http_req_duration: ["p(95)<500"],
-//   },
-// };
-
 export default function () {
+  // Select a random set of firstName and lastName from the test data
   const [firstName, lastName] =
     testData[Math.floor(Math.random() * testData.length)];
 
-  const url = "http://localhost:8080/friend";
+  // Define the target URL for the POST request
+  const url = "http://localhost:3000/friends";
+
+  // Prepare the payload for the POST request, converting it to JSON
   const payload = JSON.stringify({
     firstName,
     lastName,
   });
 
+  // Set the headers for the HTTP request
   const params = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
+  // Send the POST request and store the response
   const res = http.post(url, payload, params);
 
+  // Validate the response status is 201 (Created)
   check(res, {
     "status is 201": (r) => r.status === 201,
   });
 
-  // const responseBody = JSON.parse(res.body);
-  // const friendLink = responseBody._links.friend.href;
-  // console.log(`Created friend ${firstName} ${lastName} at ${friendLink}`);
+  // Parse the response body to access the returned data
+  const responseBody = JSON.parse(res.body);
 
-  console.log(
-    `Created friend entry for ${firstName} ${lastName} at ${res.headers["Location"]}`
-  );
+  // Extract the first name, last name, and link from the response
+  const retrievedFirstName = responseBody.firstName;
+  const retrievedLastName = responseBody.lastName;
+  const friendLink = responseBody._links.self.href;
 
-  sleep(4);
+  // Log the creation of the friend entry
+  console.log(`Created friend ${firstName} ${lastName} at ${friendLink}`);
+
+  // Check if the sent and received names match, and log the result
+  if (retrievedFirstName === firstName && retrievedLastName === lastName) {
+    console.log("Names match");
+  }
+
+  // Pause for 0.1 seconds between iterations to simulate a realistic user wait time
+  sleep(0.1);
 }
