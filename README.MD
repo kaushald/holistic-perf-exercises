@@ -28,19 +28,19 @@ lighthouse --view https://kaushaldalvi.com/
 ##### RUN BUDGET TEST - EASY
 
 ```shell
-lighthouse-ci --budgetPath ./budget.easy.json --view https://kaushaldalvi.com/
+lighthouse-ci https://kaushaldalvi.com/ --budgetPath ./budget.easy.json
 ```
 
 ##### RUN BUDGET TEST - NORMAL
 
 ```shell
-lighthouse-ci --budgetPath ./budget.json --view https://kaushaldalvi.com/
+lighthouse-ci https://kaushaldalvi.com/ --budgetPath ./budget.json
 ```
 
 ##### RUN BUDGET TEST - STRICT
 
 ```shell
-lighthouse-ci --budgetPath ./budget.strict.json --view https://kaushaldalvi.com/
+lighthouse-ci https://kaushaldalvi.com/ --budgetPath ./budget.strict.json
 ```
 
 #### BUDGET CALCULATOR
